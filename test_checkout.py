@@ -1,0 +1,62 @@
+# Test the rules from Code Kata 9.
+
+import unittest
+import checkout
+
+class TestCheckout(unittest.TestCase):
+    def test_totals(self):
+        co = checkout.Checkout()
+        co.scan("")
+        self.assertEqual(0, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("A")
+        self.assertEqual(50, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AB")
+        self.assertEqual(80, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("CDBA")
+        self.assertEqual(115, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AA")
+        self.assertEqual(100, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AAA")
+        self.assertEqual(130, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AAAA")
+        self.assertEqual(180, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AAAAA")
+        self.assertEqual(230, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AAAAAA")
+        self.assertEqual(260, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AAAB")
+        self.assertEqual(160, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AAABB")
+        self.assertEqual(175, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("AAABBD")
+        self.assertEqual(190, co.calculate_total())
+        co = checkout.Checkout()
+        co.scan("DABABA")
+        self.assertEqual(190, co.calculate_total())
+
+    def test_incremental(self):
+        co = checkout.Checkout()
+        co.scan("A")
+        self.assertEqual(50, co.calculate_total())
+        co.scan("B")
+        self.assertEqual(80, co.calculate_total())
+        co.scan("A")
+        self.assertEqual(130, co.calculate_total())
+        co.scan("A")
+        self.assertEqual(160, co.calculate_total())
+        co.scan("B")
+        self.assertEqual(175, co.calculate_total())
+
+if __name__ == '__main__':
+    unittest.main()
